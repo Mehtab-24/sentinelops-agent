@@ -1,0 +1,29 @@
+{
+  "tools": [
+    {
+      "name": "fetch_cve_advisory",
+      "description": "Retrieves published severity, CVSS score, and recommended patch version for a CVE identifier.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "cve_id": { "type": "string", "description": "The CVE ID, e.g. CVE-2023-45133" },
+          "package_name": { "type": "string", "description": "Affected package name" }
+        },
+        "required": ["cve_id", "package_name"]
+      }
+    },
+    {
+      "name": "dispatch_remediation_pr",
+      "description": "Dispatches an automated Pull Request payload with the dependency patch diff.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "repository": { "type": "string", "description": "Target repository" },
+          "patch_diff": { "type": "string", "description": "Unified Git diff" },
+          "risk_level": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] }
+        },
+        "required": ["repository", "patch_diff", "risk_level"]
+      }
+    }
+  ]
+}
